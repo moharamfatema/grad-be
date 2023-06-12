@@ -1,0 +1,9 @@
+[tool.black]
+line_length = 80
+include_trailing_comma = true
+include = '\.py?$'
+single-quotes = true
+double-quotes = false
+
+[tool.pylint.format]
+max-line-length = "80"
