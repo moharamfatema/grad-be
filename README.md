@@ -75,9 +75,9 @@ To use the Thunder Client extension in VS Code to upload a video using form data
 
 6. Click on the "+" button to add a new form field. Set the "Key" to the name of the field where the video should be uploaded. For example, enter "video" as the key.
 
-8. Click on the "+" button to add a new form field. Set the "Key" to "prediction-type" and add the desired value.
-
 7. Set the "Value" of the form field to the path of the video file on your local machine. You can use the file picker icon to browse and select the video file.
+
+8. Click on the "+" button to add a new form field. Set the "Key" to "prediction_type" and add the desired value.
 
 8. If needed, you can add more form fields by clicking on the "+" button and repeating steps 6 and 7.
 
