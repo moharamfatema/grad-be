@@ -59,7 +59,7 @@ The following endpoints are available for accessing the API:
 
 - `POST /predict`: Upload a video file and specify the prediction type [`binary`,`multi-class`] and receive the predicted violence types.
 
-## Tip: Sed requests using ThunderClient
+## Tip: Send requests using ThunderClient
 
 To use the Thunder Client extension in VS Code to upload a video using form data, follow these steps:
 
