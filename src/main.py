@@ -23,7 +23,6 @@ PREDICTION_TYPES = {"binary", "multi-class"}
 ALLOWED_EXTENSIONS = {"mp4", "mov", "avi", "mkv"}  # allow videos
 
 predictor = Predictor()
-input_shape = predictor.get_input_shape()
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -31,7 +30,7 @@ app.config["CORS_HEADERS"] = "Content-Type"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 
-def prediction_from_video(video_path: Path, prediction_type: str):
+def prediction_from_video(predictor:Predictor, video_path: Path, prediction_type: str):
     """
     Perform prediction on the given video file
 
@@ -42,6 +41,8 @@ def prediction_from_video(video_path: Path, prediction_type: str):
     Returns:
         np.ndarray: Prediction array
     """
+    input_shape = predictor.get_input_shape()
+
     log.debug("prediction_from_video: %s", video_path.name)
     log.debug("input_shape: %s", input_shape)
     array = video_to_array(
@@ -151,6 +152,7 @@ def predict():
 
     return resp
 
-
 if __name__ == "__main__":
     app.run(port=8080, debug=True)
+else:
+    gunicorn_app = app

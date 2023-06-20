@@ -1,6 +1,8 @@
-flask
-tensorflow
-keras
-numpy
-opencv-python
-flask-cors
+flask==2.3
+tensorflow==2.12
+keras==2.12
+numpy==1.23
+opencv-python==4.7.0.72
+flask-cors==3.0
+gunicorn==20.1.0
+waitress

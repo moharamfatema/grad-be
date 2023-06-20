@@ -1,1 +1,13 @@
 env
+playground.py
+**/__pycache__
+src/tmp
+# src/logs
+
+Dockerfile
+README.md
+*.pyc
+*.pyo
+*.pyd
+__pycache__
+.pytest_cache
