@@ -5,12 +5,13 @@ FROM python:3.9-slim
 # Allow statements and log messages to immediately appear in the logs
 ENV PYTHONUNBUFFERED True
 
+# RUN apt-get update && apt-get install python-opencv  -y
+
 # Copy local code to the container image.
 ENV APP_HOME /app
 WORKDIR $APP_HOME
 COPY . ./
 
-RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
 # Install production dependencies.
 RUN pip install --user --no-cache-dir -r requirements.txt
 
