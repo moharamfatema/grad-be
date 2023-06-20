@@ -10,8 +10,9 @@ ENV APP_HOME /app
 WORKDIR $APP_HOME
 COPY . ./
 
+RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
 # Install production dependencies.
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --user --no-cache-dir -r requirements.txt
 
 
 # Run the web service on container startup. Here we use the gunicorn
@@ -23,4 +24,4 @@ EXPOSE 8080
 
 WORKDIR $APP_HOME/src
 
-CMD exec gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 main:gunicorn_app
+CMD exec waitress-serve --listen=127.0.0.1:8080 main:gunicorn_app
