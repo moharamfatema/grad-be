@@ -32,7 +32,7 @@ app.config["CORS_HEADERS"] = "Content-Type"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 
-def prediction_from_video(predictor:Predictor, video_path: Path, prediction_type: str):
+def prediction_from_video(video_path: Path, prediction_type: str, predictor:Predictor=predictor ):
     """
     Perform prediction on the given video file
 
@@ -136,8 +136,8 @@ def predict():
     resp = None
     try:
         prediction = prediction_from_video(
-            Path(app.config["UPLOAD_FOLDER"]).joinpath(filename),
-            request.form["prediction_type"],
+            video_path=Path(app.config["UPLOAD_FOLDER"]).joinpath(filename),
+            prediction_type=request.form["prediction_type"],
         )
         if prediction is None:
             resp = jsonify(
