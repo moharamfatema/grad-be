@@ -18,6 +18,8 @@ from app.modules.util.log import log
 from app.modules.model.model import Predictor
 from app.modules.process.process import video_to_array
 
+BAD_REQUEST="Bad Request"
+OK = "ok"
 UPLOAD_FOLDER = "tmp/videos"
 PREDICTION_TYPES = {"binary", "multi-class"}
 ALLOWED_EXTENSIONS = {"mp4", "mov", "avi", "mkv"}  # allow videos
@@ -111,7 +113,7 @@ def validate_request(req: request):
 @app.route("/")
 def health_check():
     """Health check endpoint"""
-    return jsonify({"status": "ok"})
+    return jsonify({"status": OK})
 
 
 @app.route("/predict", methods=["POST"])
@@ -121,7 +123,7 @@ def predict():
     # validate request
     valid, ret = validate_request(request)
     if not valid:
-        return jsonify({"status": "400", "message": ret})
+        return jsonify({"status": BAD_REQUEST, "message": ret}), 400
 
     file = request.files["video"]
 
@@ -139,13 +141,13 @@ def predict():
         )
         if prediction is None:
             resp = jsonify(
-                {"status": "400", "message": "Video processing failed"}
-            )
+                {"status": BAD_REQUEST, "message": "Video processing failed"}
+            ), 400
         else:
-            resp = jsonify({"status": "200", "prediction": prediction})
+            resp = jsonify({"status": OK, "prediction": prediction})
     except Exception as exp:
         log.error(exp)
-        resp = jsonify({"status": "400", "message": "Video processing failed"})
+        resp = jsonify({"status": BAD_REQUEST, "message": "Video processing failed"})
     finally:
         # delete the video
         Path(app.config["UPLOAD_FOLDER"]).joinpath(filename).unlink()
