@@ -10,6 +10,7 @@ functions:
 """
 from pathlib import Path
 
+from time import time
 from werkzeug.utils import secure_filename
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
@@ -18,15 +19,15 @@ from app.modules.util.log import log
 from app.modules.model.model import Predictor
 from app.modules.process.process import video_to_array
 
-BAD_REQUEST="Bad Request"
+BAD_REQUEST = "Bad Request"
 OK = "ok"
 UPLOAD_FOLDER = "tmp/videos"
 PREDICTION_TYPES = {"binary", "multi-class"}
 ALLOWED_EXTENSIONS = {"mp4", "mov", "avi", "mkv"}  # allow videos
 
-Path.exists(Path(UPLOAD_FOLDER)) or Path(UPLOAD_FOLDER).mkdir(parents=True)
+_ = Path.exists(Path(UPLOAD_FOLDER)) or Path(UPLOAD_FOLDER).mkdir(parents=True)
 
-predictor = Predictor()
+main_predictor = Predictor()
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -34,7 +35,11 @@ app.config["CORS_HEADERS"] = "Content-Type"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 
-def prediction_from_video(video_path: Path, predictor:Predictor = predictor, prediction_type: str = "binary"):
+def prediction_from_video(
+    video_path: Path,
+    predictor: Predictor = main_predictor,
+    prediction_type: str = "binary",
+):
     """
     Perform prediction on the given video file
 
@@ -128,9 +133,10 @@ def predict():
         return jsonify({"status": BAD_REQUEST, "message": ret}), 400
 
     file = request.files["video"]
-
     # save video to tmp
-    filename = secure_filename(file.filename)
+    # get request timestamp from flask perf counter
+    stamp = time()
+    filename = secure_filename(f"{stamp}_{file.filename}")
     file.save(Path(app.config["UPLOAD_FOLDER"]).joinpath(filename))
 
     # perform prediction
@@ -142,19 +148,28 @@ def predict():
             prediction_type=request.form["prediction_type"],
         )
         if prediction is None:
-            resp = jsonify(
-                {"status": BAD_REQUEST, "message": "Video processing failed"}
-            ), 400
+            resp = (
+                jsonify(
+                    {
+                        "status": BAD_REQUEST,
+                        "message": "Video processing failed",
+                    }
+                ),
+                400,
+            )
         else:
             resp = jsonify({"status": OK, "prediction": prediction})
     except Exception as exp:
         log.error(exp)
-        resp = jsonify({"status": BAD_REQUEST, "message": "Video processing failed"})
+        resp = jsonify(
+            {"status": BAD_REQUEST, "message": "Video processing failed"}
+        )
     finally:
         # delete the video
         Path(app.config["UPLOAD_FOLDER"]).joinpath(filename).unlink()
 
     return resp
+
 
 if __name__ == "__main__":
     app.run(port=8080, debug=True)
