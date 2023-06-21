@@ -32,7 +32,7 @@ app.config["CORS_HEADERS"] = "Content-Type"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 
-def prediction_from_video(predictor:Predictor, video_path: Path, prediction_type: str):
+def prediction_from_video(video_path: Path, predictor:Predictor = predictor, prediction_type: str = "binary"):
     """
     Perform prediction on the given video file
 
@@ -136,8 +136,8 @@ def predict():
     resp = None
     try:
         prediction = prediction_from_video(
-            Path(app.config["UPLOAD_FOLDER"]).joinpath(filename),
-            request.form["prediction_type"],
+            video_path=Path(app.config["UPLOAD_FOLDER"]).joinpath(filename),
+            prediction_type=request.form["prediction_type"],
         )
         if prediction is None:
             resp = jsonify(
@@ -155,6 +155,6 @@ def predict():
     return resp
 
 if __name__ == "__main__":
-    app.run(port=8080, debug=True)
+    app.run(port=8060, debug=True)
 else:
     gunicorn_app = app

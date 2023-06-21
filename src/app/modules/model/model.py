@@ -26,7 +26,7 @@ from app.modules.util.log import log
 CHECKPOINT_PATH = "app/assets/checkpoint.tf"
 CHECKPOINT_PATH = Path.cwd().joinpath(CHECKPOINT_PATH)
 
-TARGET_NAMES = {"normal", "violence"}
+TARGET_NAMES = ("normal", "violence")
 
 
 def configure_tf():
