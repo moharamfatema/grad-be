@@ -1,0 +1,336 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "grad-be-flask",
+    "dateExported": "2023-06-21T11:19:33.364Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "f42597fc-6360-47a8-9174-818da356786e",
+            "name": "validations",
+            "containerId": "",
+            "created": "2023-06-21T11:08:48.549Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "c29f5079-6063-4c0f-8875-b8515ea4495b",
+            "name": "predict binary non video",
+            "containerId": "f42597fc-6360-47a8-9174-818da356786e",
+            "created": "2023-06-21T11:11:00.977Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "e3a2836c-f4a8-41fc-94be-d5db09410101",
+            "colId": "012548d9-f70d-4902-a9a9-0e6ad5da9fa9",
+            "containerId": "",
+            "name": "health check",
+            "url": "",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-06-06T19:05:53.143Z",
+            "modified": "2023-06-19T22:20:18.918Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "ok"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": ""
+                },
+                {
+                    "type": "res-time",
+                    "custom": "",
+                    "action": "<",
+                    "value": "1000"
+                }
+            ]
+        },
+        {
+            "_id": "b734fdc5-3c74-467b-b684-983996a69db3",
+            "colId": "012548d9-f70d-4902-a9a9-0e6ad5da9fa9",
+            "containerId": "f42597fc-6360-47a8-9174-818da356786e",
+            "name": "predict binary no video",
+            "url": "/predict",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-06-21T11:08:56.564Z",
+            "modified": "2023-06-21T11:17:25.024Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "predictionType",
+                        "value": "binary"
+                    }
+                ],
+                "files": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "400"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": ""
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "Bad Request"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "No file found"
+                }
+            ]
+        },
+        {
+            "_id": "42f36eb3-c092-4433-b672-a2be2b6b3baf",
+            "colId": "012548d9-f70d-4902-a9a9-0e6ad5da9fa9",
+            "containerId": "f42597fc-6360-47a8-9174-818da356786e",
+            "name": "predict binary no type",
+            "url": "/predict",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-06-21T11:09:58.797Z",
+            "modified": "2023-06-21T11:10:36.997Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [],
+                "files": [
+                    {
+                        "name": "video",
+                        "value": "d:\\study_stuff\\9th_term\\graduation_project\\frontend\\test_video.mp4"
+                    }
+                ]
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "400"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": ""
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "Bad Request"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "No prediction type found"
+                }
+            ]
+        },
+        {
+            "_id": "2ffd3e97-ab12-4230-913d-cd4c8cfb0ab9",
+            "colId": "012548d9-f70d-4902-a9a9-0e6ad5da9fa9",
+            "containerId": "",
+            "name": "predict binary",
+            "url": "/predict",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-06-11T22:04:34.556Z",
+            "modified": "2023-06-21T11:13:22.208Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "prediction_type",
+                        "value": "binary"
+                    }
+                ],
+                "files": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "400"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": ""
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "Bad Request"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "No file found"
+                }
+            ]
+        },
+        {
+            "_id": "936091bc-aa92-4aa1-9527-c3ec64d90f1d",
+            "colId": "012548d9-f70d-4902-a9a9-0e6ad5da9fa9",
+            "containerId": "f42597fc-6360-47a8-9174-818da356786e",
+            "name": "predict binary non video",
+            "url": "/predict",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-06-21T11:11:07.177Z",
+            "modified": "2023-06-21T11:19:09.351Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "prediction_type",
+                        "value": "binary"
+                    }
+                ],
+                "files": [
+                    {
+                        "name": "video",
+                        "value": "d:\\study_stuff\\9th_term\\graduation_project\\backend\\src\\main.py"
+                    }
+                ]
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "400"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": ""
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "Bad Request"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "Invalid file type"
+                }
+            ]
+        },
+        {
+            "_id": "95080667-62ba-4ab8-8613-8104bd6e6ec7",
+            "colId": "012548d9-f70d-4902-a9a9-0e6ad5da9fa9",
+            "containerId": "",
+            "name": "predict multi-class",
+            "url": "/predict",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-06-12T20:28:16.638Z",
+            "modified": "2023-06-21T11:19:27.420Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formdata",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "prediction_type",
+                        "value": "multi-class"
+                    }
+                ],
+                "files": [
+                    {
+                        "name": "video",
+                        "value": "d:\\study_stuff\\9th_term\\graduation_project\\frontend\\test_video.mp4"
+                    }
+                ]
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": ""
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "notcontains",
+                    "value": "400"
+                }
+            ]
+        }
+    ],
+    "settings": {
+        "tests": [
+            {
+                "type": "res-body",
+                "custom": "",
+                "action": "isjson",
+                "value": ""
+            }
+        ],
+        "options": {
+            "baseUrl": "http://localhost:8080"
+        }
+    }
+}
