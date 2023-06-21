@@ -24,6 +24,8 @@ UPLOAD_FOLDER = "tmp/videos"
 PREDICTION_TYPES = {"binary", "multi-class"}
 ALLOWED_EXTENSIONS = {"mp4", "mov", "avi", "mkv"}  # allow videos
 
+Path.exists(Path(UPLOAD_FOLDER)) or Path(UPLOAD_FOLDER).mkdir(parents=True)
+
 predictor = Predictor()
 
 app = Flask(__name__)
@@ -155,6 +157,6 @@ def predict():
     return resp
 
 if __name__ == "__main__":
-    app.run(port=8060, debug=True)
+    app.run(port=8080, debug=True)
 else:
     gunicorn_app = app

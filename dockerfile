@@ -5,7 +5,7 @@ FROM python:3.9-slim
 # Allow statements and log messages to immediately appear in the logs
 ENV PYTHONUNBUFFERED True
 
-# RUN apt-get update && apt-get install python-opencv  -y
+# RUN apt-get update && apt-get install libgtk2.0-dev pkg-config  -y
 
 # Copy local code to the container image.
 ENV APP_HOME /app
