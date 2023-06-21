@@ -75,7 +75,7 @@ def video_to_array(
         log.error("video_to_array: %s", exp)
     finally:
         video.release()
-        cv2.destroyAllWindows()
+        # cv2.destroyAllWindows()
 
     if failed is not False:
         raise failed

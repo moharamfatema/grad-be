@@ -136,7 +136,7 @@ class Predictor:
         prediction = self.__target_names[
             np.argmax(
                 self.__model_bianry.predict(
-                    array[0][np.newaxis, ...], verbose=2
+                    array, verbose=2
                 ),
                 axis=1,
             )
