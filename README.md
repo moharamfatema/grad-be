@@ -1,10 +1,18 @@
 # Graduation Back-End Application
 
+
+[![Flask](https://img.shields.io/badge/Flask-2.3-blue.svg?style=for-the-badge)](https://pypi.org/project/Flask/)
+[![Docker](https://img.shields.io/badge/Docker-20.10.7-blue.svg?style=for-the-badge)](https://www.docker.com/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![OpenCV](https://img.shields.io/badge/OpenCV-4.7-orange.svg?style=for-the-badge)](https://opencv.org/)
+[![Gunicorn](https://img.shields.io/badge/Gunicorn-20.1.0-red.svg?style=for-the-badge)](https://gunicorn.org/)
+[![GCP](https://img.shields.io/badge/GCP-Google%20Cloud%20Platform-yellow.svg?style=for-the-badge)](https://cloud.google.com/)
+
 This repository contains the back-end API for classifying violence types in videos using a Keras model. It is built using Flask.
 
 ## Prerequisites
 
-- Python 3.x
+- Python 3.9
 - pip (Python package installer)
 
 ## Installation
